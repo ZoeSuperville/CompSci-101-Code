@@ -1,0 +1,437 @@
+'''
+Created on Sep 15, 2018
+
+@author: Zoe_Superville
+'''
+
+"""
+Zoe Superville (zas17), Assignment 1, Totem Poles
+"""
+
+import random
+
+#############################################
+
+"""
+All functions staring with "hair" give an option for the type of hair the totem head will have
+"""
+
+def hair_pointy():
+    """
+    Pointy hair
+    """
+    a1 = r"012345678901234567"
+    a2 = r" /\/\/\/\/\/\/\/\ "
+    return a2
+
+def hair_wavy():
+    """
+    Wavy hair
+    """
+    a1  = r"012345678901234567"
+    a2  = r" ~~~~~~~~~~~~~~~~ " + "\n"
+    a2 += r" ~~~~~~~~~~~~~~~~ "
+    return a2
+
+def hair_curly():
+    """
+    Curly hair
+    """
+    a1  = r"012345678901234567"
+    a2  = r" oooooooooooooooo " + "\n"
+    a2 += r" oooooooooooooooo "
+    return a2
+
+def hair_parted():
+    """
+    Parted hair
+    """
+    a1  = r"012345678901234567"
+    a2  = r" \\\\\\\\//////// "
+    return a2
+
+def hair_messy():
+    """
+    Messy hair
+    """
+    a1  = r"012345678901234567"
+    a2  = r" \/\/\|\/\/||\//\ " + "\n"
+    a2 += r" \\|/\//||/\////\ "
+    return a2
+#############################################
+
+"""
+Prints a selfie band with my net id on it
+"""
+
+def selfie_band():
+    """
+    Selfie band to be places under hair but above eyes
+    """
+    s  = r"012345678901234567"
+    s  = r" +--------------+ " + "\n"
+    s += r" |zas17    zas17| " + "\n"
+    s += r" +--------------+ "
+    return s
+
+#############################################
+
+"""
+All functions staring with "eyes" give an option for the type of eyes the totem head will have
+"""
+
+def eyes_glasses():
+    """
+    Eyes with glasses
+    """
+    b  = r"012345678901234567"
+    b  = r" +--------------+ " + "\n"
+    b += r" |  ___    ___  | " + "\n"
+    b += r" |-|_O_|--|_O_|-| " + "\n"
+    b += r" |              | "
+    return b
+
+def eyes_big():
+    """
+    Big eyes
+    """
+    b = r"012345678901234567"
+    b  = r" +--------------+ " + "\n"
+    b += r" |  ___    ___  | " + "\n"
+    b += r" | |   |  |   | | " + "\n"
+    b += r" | | o |  | o | | " + "\n"
+    b += r" | |___|  |___| | " + "\n"
+    b += r" |              | "
+    return b
+
+def eyes_right():
+    """
+    Eyes looking right
+    """
+    b = r"012345678901234567"
+    b  = r" +--------------+ " + "\n"
+    b += r" |  ___    ___  | " + "\n"
+    b += r" | |   |  |   | | " + "\n"
+    b += r" | |  o|  |  o| | " + "\n"
+    b += r" | |___|  |___| | " + "\n"
+    b += r" |              | "
+    return b
+
+def eyes_left():
+    """
+    Eyes looking left
+    """
+    b = r"012345678901234567"
+    b  = r" +--------------+ " + "\n"
+    b += r" |  ___    ___  | " + "\n"
+    b += r" | |   |  |   | | " + "\n"
+    b += r" | |o  |  |o  | | " + "\n"
+    b += r" | |___|  |___| | " + "\n"
+    b += r" |              | "
+    return b
+
+def eyes_crazy():
+    """
+    Crazy eyes
+    """
+    b = r"012345678901234567"
+    b  = r" +--------------+ " + "\n"
+    b += r" |  ___    ___  | " + "\n"
+    b += r" | |o  |  |   | | " + "\n"
+    b += r" | |   |  |   | | " + "\n"
+    b += r" | |___|  |__o| | " + "\n"
+    b += r" |              | "
+    return b
+
+#############################################
+
+"""
+All functions staring with "nose" give an option for the type of nose the totem head will have
+"""
+    
+def nose_up():
+    """
+    Pointy nose
+    """
+    c  = r"012345678901234567"
+    c  = r" |      /\      | " + "\n"
+    c += r" |     /  \     | "
+    return c
+
+def nose_square():
+    """
+    Square nose
+    """
+    c  = r"012345678901234567"
+    c  = r" |     |  |     | " + "\n"
+    c += r" |     |__|     | "
+    return c
+
+def nose_small():
+    """
+    Small nose
+    """
+    c  = r"012345678901234567"
+    c  = r" |      ..      | " + "\n"
+    c += r" |              | "
+    return c
+
+def nose_left():
+    """
+    Nose pointed left
+    """
+    c  = r"012345678901234567"
+    c  = r" |      /       | " + "\n"
+    c += r" |     /__      | "
+    return c
+
+def nose_right():
+    """
+    Nose pointed right
+    """
+    c  = r"012345678901234567"
+    c  = r" |       \      | " + "\n"
+    c += r" |      __\     | "
+    return c
+
+#############################################
+
+"""
+All functions staring with "mouth" give an option for the type of mouth the totem head will have
+"""
+
+def mouth_smile():
+    """
+    Mouth with smiles
+    """
+    d  = r"012345678901234567"
+    d  = r" |              | " + "\n"
+    d += r" |    \____/    | " + "\n"
+    d += r" |______________| "
+    return d
+
+def mouth_open():
+    """
+    Open mouth
+    """
+    d  = r"012345678901234567"
+    d  = r" |    ______    | " + "\n"
+    d += r" |   (      )   | " + "\n"
+    d += r" |   (______)   | " + "\n"
+    d += r" |______________| "
+    return d
+    
+def mouth_tooth():
+    """
+    Mouth with one tooth
+    """
+    d  = r"012345678901234567"
+    d  = r" |    ______    | " + "\n"
+    d += r" |   |  |_| |   | " + "\n"
+    d += r" |   |______|   | " + "\n"
+    d += r" |______________| "
+    return d
+
+def mouth_teeth():
+    """
+    Mouth with teeth
+    """
+    d  = r"012345678901234567"
+    d  = r" |    _______   | " + "\n"
+    d += r" |   |_|_|_|_|  | " + "\n"
+    d += r" |   |_|_|_|_|  | " + "\n"
+    d += r" |______________| "
+    return d
+
+def mouth_tongue():
+    """
+    Mouth with tongue
+    """
+    d  = r"012345678901234567"
+    d  = r" |              | " + "\n"
+    d += r" |    \____/    | " + "\n"
+    d += r" |      |_|     | " + "\n"
+    d += r" |______________| "
+    return d
+
+#############################################   
+
+"""
+Creates different types of heads with different features
+"""
+
+def head_normal():
+    """
+    Creates head with pointy hair, big eyes, nose pointed right and mouth with smile
+    """
+    print (hair_pointy())
+    print (eyes_big())
+    print (nose_right())
+    print (mouth_smile())
+    
+def head_crazy():
+    """
+    Creates head with messy hair, crazy eyes, small nose and mouth with tongue
+    """
+    print (hair_messy())
+    print (eyes_crazy())
+    print (nose_small())
+    print (mouth_tongue())
+    
+def head_suprised():
+    """
+    Creates head with parted hair, eyes pointed right, nose pointed left and open mouth
+    """
+    print (hair_parted())
+    print (eyes_right())
+    print (nose_left())
+    print (mouth_open())
+    
+def head_glasses():
+    """
+    Creates head with parted hair, eyes with glasses, square nose and mouth with teeth
+    """
+    print (hair_parted())
+    print (eyes_glasses())
+    print (nose_square())
+    print (mouth_teeth())
+    
+def head_cute():
+    """
+    Creates head with wavy hair, eyes pointed left, pointy nose and mouth with one tooth
+    """
+    print (hair_wavy())
+    print (eyes_left())
+    print (nose_up())
+    print (mouth_tooth())
+    
+#############################################   
+
+"""
+Created different heads with different features, some set, and some in the parameters
+"""
+    
+def head_with_eyes(eyesfunc):
+    """
+    Eyes are parameters, everything else is fixed
+    """
+    print (hair_pointy())
+    print (eyesfunc)
+    print (nose_small())
+    print (mouth_smile())
+    
+def head_with_mouth(mouthfunc):
+    """
+    Mouth is parameters, everything else is fixed
+    """
+    print (hair_wavy())
+    print (eyes_right())
+    print (nose_right())
+    print (mouthfunc)
+    
+def head_with_nose(nosefunc):
+    """
+    Nose is parameter, eneything else is fixed
+    """
+    print(hair_messy())
+    print(eyes_glasses())
+    print(nosefunc)
+    print(mouth_tongue())
+    
+def selfie(eyesfunc, mouthfunc):
+    """
+    Eyes and mouth are parameters, everything else is fixed
+    """
+    print (hair_messy())
+    print (selfie_band())
+    print (eyesfunc)
+    print (nose_small())
+    print (mouthfunc)
+    
+#############################################   
+
+"""
+Produces a random number and associates that number with a certain head (randomizes which head will be printed)
+"""
+
+def random_head():
+    """
+    prints a possibly different totem pole each time the program is run
+    produces a number 1-5
+    1 corresponds to crazy head
+    2 corresponds to cute head
+    3 corresponds to head with glasses
+    4 corresponds to normal head
+    5 corresponds to suprised head
+    """
+    x = random.randint(1,5)
+    if x == 1:
+        head_crazy()
+    elif x == 2:
+        head_cute()
+    elif x == 3:
+        head_glasses()
+    elif x == 4:
+        head_normal()
+    else:
+        head_suprised()
+        
+#############################################   
+    
+"""
+Creates totem poles calling functions declared above
+"""
+
+def totem_fixed():
+    """
+    Prints the same totem pole each time it's called
+    prints a normal head, a crazy head, and a suprised head
+    """
+    head_normal()
+    head_crazy()
+    head_suprised()    
+    
+def totem_selfie():
+    """
+    Prints a totem pole in which each head has a selfie band someplace in the head
+    selfie head with big eyes and open mouth
+    selfie head with eyes pointed left and mouth with tongue
+    selfie head with eyes with glasses and mouth with smile
+    """
+    selfie (eyes_big(), mouth_open())
+    selfie (eyes_left(), mouth_tongue())
+    selfie (eyes_glasses(), mouth_smile())
+    
+def totem_random():
+    """
+    Prints a random totum 3 times
+    """
+    random_head()
+    random_head()
+    random_head()
+    
+#############################################   
+
+"""
+Prints totem poles
+"""
+
+if __name__ == '__main__':
+    
+    """
+    Prints fixed totum into the console
+    """
+    print("\nfixed totem\n")
+    totem_fixed()
+    
+    """
+    Prints selfie totum into the console
+    """
+    print("\nself totem\n")
+    totem_selfie()
+    
+    """
+    Prints random totum into the console
+    """
+    print("\nrandom totem\n")
+    totem_random()
