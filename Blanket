@@ -1,0 +1,72 @@
+'''
+Created on Nov 30, 2018
+
+@author: Zoe_Superville
+'''
+def order(preferences, size, yarn):
+    '''
+    preferences (list of strings) - the colors the customer prefers by order 
+    of preference
+    size (int) - the number of balls of yarn needed
+    yarn (list of strings) - list of strings of two values where the first is 
+    the color of yarn and the second is how much yarn is available
+          
+    Return a list of strings of two values where the first element is a color
+    and the second is how much yarn is needed sorted by the color.
+    '''
+    
+    matchingYarn = []
+    for color in preferences:
+        for yarns in yarn:
+            if yarns.split()[0] == color:
+                matchingYarn.append((yarns.split()[0], yarns.split()[1]))
+                
+    total = 0
+    for set in matchingYarn:
+        total += int(set[1])
+    if size > total:
+        return []
+    
+    setList = []
+    firstPick = size//len(matchingYarn)
+    count = 0
+    for set in matchingYarn:
+        if int(set[1]) >= firstPick:
+            setList.append([set[0], firstPick])
+            count += firstPick
+        else:
+            setList.append([set[0], int(set[1])])
+            count += int(set[1])
+    
+    newSetList = []      
+    leftOver = size - count
+    leftOverList = []
+    index = 0
+    while index < len(setList):
+        if setList[index][1] != int(matchingYarn[index][1]):
+            leftOverList.append(setList[index])
+        else:
+            newSetList.append(setList[index])
+        index += 1
+    
+    loopind = 0
+    while leftOver>0:
+        leftOverList[loopind][1] += 1
+        leftOver -= 1
+        if leftOverList[loopind][1] == int(matchingYarn[loopind][1]):
+            newSetList.append(leftOverList[loopind])
+            leftOverList.remove(leftOverList[loopind])
+        else:
+            if loopind == len(leftOverList) - 1:
+                loopind = 0
+            else:
+                loopind += 1  
+     
+    for element in leftOverList:
+        newSetList.append(element)
+        
+    retList = []
+    for set in newSetList:
+        retList.append(set[0] + ' ' + str(set[1]))
+    return sorted(retList)        
+    
