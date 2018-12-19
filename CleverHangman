@@ -1,0 +1,210 @@
+'''
+Description:
+        You must create a Clever Hangman game that allows the user to play and guess a secret word.  
+        See the assignment description for details.
+    
+@author: Zoe Superville    zas17
+'''
+import random
+DEBUG = False
+
+def handleUserInputDebugMode():
+    """
+    Allows user to decide if they wish to play in DEBUG
+    mode or PLAY mode
+    """
+    DEBUGMODE = input("Which mode do you want: (d)ebug or (p)lay: ")
+    if DEBUGMODE == "d":
+        DEBUG = True
+    if DEBUGMODE == "p":
+        DEBUG = False
+    return DEBUG
+
+
+def handleUserInputWordLength():
+    """
+    Asks user for length of a word and then returns that value as an integer
+    """
+    wordlength = input("How many letters in the word you'll guess: ")
+    return int(wordlength)
+    
+    
+def handleUserInputDifficulty():
+    '''
+    This function asks the user if they would like to play the game in (h)ard or (e)asy mode, then returns the 
+    corresponding number of misses allowed for the game. 
+    '''
+    print("How many misses do you want? Hard has 8 and Easy has 12.")
+    difficulty = input("(h)ard or (e)asy>")
+    if difficulty == "h":
+        misses = 8
+    if difficulty == "e":
+        misses = 12
+    return misses
+
+
+def getWord(words, length):
+    '''
+    Selects the secret word that the user must guess. 
+    This is done by randomly selecting a word from words that is of length length.
+    '''
+    newword = ""
+    while len(newword) != length:
+        newword = words[random.randint(0, len(words)-1)]
+    return newword
+
+
+def createDisplayString(lettersGuessed, misses, hangmanWord):
+    '''
+    Creates the string that will be displayed to the user, using the information in the parameters.
+    '''
+    global DEBUG
+    data = ""
+    data2 = ""
+    lettersGuessed = sorted(lettersGuessed)
+    for w in "abcdefghijklmnopqrstuvwxyz":
+        if w not in lettersGuessed:
+            data = data + w
+        else:
+            data = data + " "
+    for w in range(len(hangmanWord)):
+        data2 = data2 + " " + hangmanWord[w]
+    displayString = "letters not yet guessed: " + data + "\n" + "misses remaining = " + str(misses) + "\n" + data2.strip()
+    return displayString
+
+
+def createTemplate(currentTemplate, letterGuess, word):
+    """
+    Creates a template based on a word
+    Created to be called on in the getNewWordList function
+    """
+    newTemplate = [x for x in currentTemplate]
+    if letterGuess in word:
+        for letter in range(len(word)):
+            if word[letter] == letterGuess:
+                newTemplate[letter] = letterGuess
+    newTemplate = "".join(newTemplate)
+    return newTemplate
+
+
+def getNewWordList(currentTemplate, letterGuess, wordList):
+    """
+    This function creates a template out of every word remaining in the list,
+    and sorts the templates into a dictionary where the key is a template
+    representing the number of times the letter appears, and the value is a list
+    of every word that corresponds to the template
+    """
+    global DEBUG
+    d = {}
+    for word in wordList:
+        temp = createTemplate(currentTemplate, letterGuess, word)
+        if temp not in d:
+            d[temp] = [word]
+        else:
+            d[temp].append(word)
+    data = d.items()
+    data = sorted(data)
+    if DEBUG:
+        for item in data:
+            print(item[0] + " : " + str(len(item[1])))
+        print("# keys = " + str(len(data)))
+    data = sorted(data, key = lambda x : len(x[1]), reverse = True)
+    if len(data) > 1:
+        if len(data[0][1]) == len(data[1][1]):
+            if data[0][0].count("_") > data[1][0].count("_"):
+                return (data[0][0], data[0][1])
+            else:
+                return (data[1][0], data[1][1])
+    return (data[0][0], data[0][1])  
+    
+    
+def handleUserInputLetterGuess(lettersGuessed, displayString):
+    '''
+    Prints displayString, then asks the user to input a letter to guess.
+    This function handles the user input of the new letter guessed and checks if it is a repeated letter.
+    '''
+    a = len(lettersGuessed)
+    while len(lettersGuessed) == a:
+        print(displayString)
+        x = input("letter> ")
+        if x in lettersGuessed:
+            print("you already guessed that")
+            continue
+        else:
+            lettersGuessed.append(x)
+            return x
+   
+   
+def updateHangmanWord(guessedLetter, secretWord, hangmanWord):
+    '''
+    Updates hangmanWord according to whether guessedLetter is in secretWord and where in secretWord guessedLetter is in.
+    '''
+    for w in range(len(secretWord)):
+        if secretWord[w] == guessedLetter:
+            hangmanWord[w] = guessedLetter
+    return hangmanWord
+
+
+def processUserGuess(guessedLetter, secretWord, hangmanWord, misses):
+    '''
+    Uses the information in the parameters to update the user's progress in the hangman game.
+    '''
+    if guessedLetter in secretWord:
+        updateHangmanWord(guessedLetter, secretWord, hangmanWord)
+        hit = True
+    if guessedLetter not in secretWord:
+        misses = misses - 1
+        hit = False
+        print("you missed: " + guessedLetter + " not in word")
+    returns = [hangmanWord, misses, hit]
+    return returns
+
+
+def runGame(filename):
+    '''
+    This function sets up the game, runs each round, and prints a final message on whether or not the user won.
+    True is returned if the user won the game. If the user lost the game, False is returned.
+    '''
+    global DEBUG
+    DEBUG = handleUserInputDebugMode()
+    words = []
+    file = open(filename)
+    wordlength = int(handleUserInputWordLength())
+    for line in file:
+        line = line.strip()
+        if len(line) == wordlength:
+            words.append(line)
+    misses = handleUserInputDifficulty()
+    hardoreasy = misses
+    secretWord = getWord(words, wordlength)
+    hangmanWord = ["_" for _ in secretWord]
+    lettersGuessed = []
+    while misses > 0:
+        guess = handleUserInputLetterGuess(lettersGuessed, createDisplayString(lettersGuessed, misses, hangmanWord))
+        if type(guess) == None:
+            continue
+        if DEBUG:
+            print("(word is " + secretWord + ")\n# possible words: " + str(len(words)))
+        newWord = getNewWordList("".join(hangmanWord), guess, words)
+        words = newWord[1]
+        if len(words) > 1:
+            secretWord = newWord[1][random.randint(0, len(newWord[1])-1)]
+        else:
+            secretWord = newWord[1][0]
+        process = processUserGuess(guess, secretWord, hangmanWord, misses)
+        misses = process[1]
+        if "_" not in hangmanWord:
+            print("you guessed the word: " + secretWord)
+            print("you made " + str(len(lettersGuessed)) + " guesses with " + str(hardoreasy - misses) + " misses")
+            return True
+    if misses == 0:        
+        print("you're hung!!\nword is " + secretWord)
+        print("you made " + str(len(lettersGuessed)) + " guesses with " + str(hardoreasy - misses) + " misses")
+        return False
+
+
+if __name__ == "__main__":
+    '''
+    Running Hangman.py should start the game, which is done by calling runGame, therefore, we have provided you this code below.
+    '''
+    runGame('lowerwords.txt')
