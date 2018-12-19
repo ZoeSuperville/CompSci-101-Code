@@ -1,0 +1,50 @@
+'''
+Created on Oct 30, 2018
+
+@author: ming & zoe superville
+'''
+
+
+import csv
+
+def readandprocess(name):
+    csvf = open(name, 'r')
+    freader = csv.reader(csvf,delimiter=',',quotechar='"')
+    datad = {}
+    header =  next(freader)
+    print("header row labels",header)
+    for row in freader:
+        #print row
+        artist = row[2]
+        song = row[1]
+        if artist not in datad: 
+            datad[artist] = [song]
+        else:
+            datad[artist].append(song)
+    #for artist in datad: 
+        #print(artist, datad[artist])
+    info = datad.items() 
+    tosort = [(len(t[1]),t[0]) for t in info] 
+    info = sorted(tosort) 
+    print(info[-1])
+    
+    
+    megacounter = {}
+    for row in freader:
+        song = row[1]
+        song_split = song.split()
+        for w in song_split:
+            if len(w) > 3:
+                if w not in megacounter:
+                    megacounter[w] = 0
+                megacounter[w] += 1
+    mostfrequent = [w for (w,c) in megacounter.items() if c == max(megacounter.values())]
+    return mostfrequent
+    
+    """
+    maxWord = [w for (w,c) in dict.items()]
+    if c == max(dictvalue)
+    """
+    
+if __name__ == '__main__':
+    readandprocess("data/top1000.csv")
